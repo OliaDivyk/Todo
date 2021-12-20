@@ -77,20 +77,14 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'firstname' => 'required',
-            'lastname' => 'required',
-            'subscription' => 'required'
-        ]);
-
         $user = User::with('subscription')->find($id);
 
         $user->update($request->all());
 
-        $user->subscription()->delete();
-
         if ($request->subscription) {
-    
+
+            $user->subscription()->delete();
+
             $user->subscription()->create([
                 'user_id' => $user->id,
                 'name_subscription' => $request->subscription,
