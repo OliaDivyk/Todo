@@ -1,7 +1,22 @@
-Setup basic
----
+**Users**
+### Admin
+```
+admin@admin.com
+password
+```
+### User
+```
+user@user.com
+password
+```
+
+# 1. Setup basic
 ```
 composer install
+```
+
+```
+php artisan key:generate
 ```
 
 ```
@@ -19,17 +34,17 @@ npm update
 ```
 npm run dev
 ```
-----
+# 2. Database and Migrations
 
-Database and Migarations
----
+Create empty DB and setup in __.env__
 ```
 php artisan migrate
 ```
-----
-Seeders (Users, Cards, Lists, Subscriptions)
----
-
+# 3. Seeders
 ```
 php artisan db:seed
+```
+# 4. Serve
+```
+php artisan serve
 ```
