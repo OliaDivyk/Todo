@@ -1,6 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CardsController;
+use App\Http\Controllers\ListsController;
+use App\Http\Controllers\SettingsController;
+use Hamcrest\Core\Set;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,4 +26,25 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::group(['middleware' => 'user.status'], function() {
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
+    Route::resource('/settings', SettingsController::class);
+    Route::resource('/lists', ListsController::class);
+
+    Route::post('/settings/password', [SettingsController::class, 'changePassword'])->name('change.password');
+
+    Route::resource('/cards', CardsController::class);
+});
+
+Route::get('/access-denied', function() {
+    return view('deniedaccess');
+});
+
+Route::get('/suspended', function() {
+    return view('auth.suspended');
+});
+
+Route::group(['middleware' => 'admin.verify'], function() {
+    Route::get('/admin', AdminController::class);
+    Route::resource('/users', UserController::class);
+});
