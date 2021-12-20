@@ -16,11 +16,11 @@
                     <a href="/users/{{ $user->id }}" class="btn btn-primary" type="button"><span class="material-icons">visibility</span></a>
                     <a href="/users/{{ $user->id }}/edit" class="btn btn-warning" type="button"><span class="material-icons">edit</span></a>
                     @if ($user->account_status === 0)
-                        <button class="btn btn-danger" onclick="changeUserStatus({{ $user->id }}, {{ $user->account_status }})" type="button">
+                        <button class="btn btn-danger" onclick="changeUserStatus({{ $user->id }}, 1)" type="button">
                             <span class="material-icons">lock</span>
                         </button>
                     @else
-                        <button class="btn btn-success" onclick="changeUserStatus({{ $user->id }}, {{ $user->account_status }})" type="button">
+                        <button class="btn btn-success" onclick="changeUserStatus({{ $user->id }}, 0)" type="button">
                             <span class="material-icons">lock_open</span>
                         </button>
                     @endif
@@ -28,5 +28,10 @@
             </div>
         </div>
     @endforeach
+    <form id="changeUserStatus" method="post" action="" class="needs-validation" novalidate enctype="multipart/form-data">
+        @csrf
+        @method('PUT')
+        <input type="hidden" id="account_status" name="account_status" value="0">
+    </form>
 </div>
 @endsection

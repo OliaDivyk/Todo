@@ -146,24 +146,10 @@ function updateTask() {
  * Admin functions
  */
 function changeUserStatus(id, account_status) {
-    if (account_status === 1) {
-        account_status = 0;
-    } else {
-        account_status = 1;
-    }
+    $('#changeUserStatus').attr('action', '/users/'+ id);
+    $('#changeUserStatus #account_status').val(account_status);
 
-    jQuery.ajax({
-        url: '/users/' + id,
-        method: 'put',
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        },
-        dataType: 'html',
-        data: { account_status },
-        success: function(){
-            location.reload();
-        }
-    });
+    $('#changeUserStatus').submit();
 }
 
 function updateUser(id) {
