@@ -6,3 +6,72 @@
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+
+.priority {
+    display: block;
+    position: relative;
+    cursor: pointer !important;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.priority input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+
+  .priority label {
+    cursor: pointer;
+    padding: 8px 30px;
+  }
+/* Create a custom checkbox */
+.radio {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+}
+
+.radio-button {
+    cursor: pointer;
+    filter: drop-shadow(0px 4px 25px rgba(0, 0, 0, 0.15));
+    color: white;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 21px;
+    border: 0;
+    background: #B6B8BF;
+    border-radius: 10px;
+    transition: .4s;
+}
+
+.radio-button:hover.type-green {
+    background-color: #24BA33;
+}
+.radio-button:hover.type-orange {
+    background-color: #EBC334;
+}
+.radio-button:hover.type-red {
+    background-color: #BA2424;
+}
+
+/* When the checkbox is checked, add a blue background */
+#priority-easy:checked  ~ .radio-button.type-green {
+    background-color: #24BA33;
+}
+#priority-normal:checked  ~ .radio-button.type-orange {
+    background-color: #EBC334;
+}
+#priority-important:checked  ~ .radio-button.type-red {
+    background-color: #BA2424;
+}
