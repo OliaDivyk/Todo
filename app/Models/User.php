@@ -18,9 +18,12 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'firstname',
+        'lastname',
         'email',
         'password',
+        'role',
+        'account_status'
     ];
 
     /**
@@ -41,4 +44,12 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+        /**
+     * Get the phone record associated with the user.
+     */
+    public function subscription()
+    {
+        return $this->hasOne(Subscriptions::class);
+    }
 }
